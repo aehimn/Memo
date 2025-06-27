@@ -3,6 +3,7 @@ package com.haemin.memo.user.service;
 import org.springframework.stereotype.Service;
 
 import com.haemin.memo.common.MD5HashingEncoder;
+import com.haemin.memo.user.domain.User;
 import com.haemin.memo.user.repository.UserRepository;
 
 @Service
@@ -34,6 +35,13 @@ public class UserService {
 		} else {
 			return false;
 		}
+	}
+	
+	public User getUser(String loginId, String password) {
+		
+		String hashingPassword = MD5HashingEncoder.encode(password);
+		
+		return userRepository.selectUser(loginId, hashingPassword);
 	}
 
 }

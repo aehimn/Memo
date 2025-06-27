@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default}">
@@ -15,7 +14,7 @@
 		</section>
 		
 		<script layout:fragment="script">
-			$("#joinBtn").on("click", function () {
+			$("#joinBtn").on("click", function() {
 
 				let id = $("#idInput").val();
 				let password = $("#passwordInput").val();

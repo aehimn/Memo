@@ -1,14 +1,48 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layouts/default}">
 		<section layout:fragment="contents" class="contents d-flex justify-content-center">
 			<div class="user-box memo-bg my-5 p-5 rounded-lg">
 				<h1 class="text-center">로그인</h1>
-				<input type="text" class="form-control mt-4" placeholder="아이디">
-				<input type="password" class="form-control mt-2" placeholder="비밀번호">
-				<button type="button" class="btn btn-secondary btn-block mt-3">로그인</button>
+				<input type="text" class="form-control mt-4" id="idInput" placeholder="아이디">
+				<input type="password" class="form-control mt-2" id="passwordInput" placeholder="비밀번호">
+				<button type="button" class="btn btn-secondary btn-block mt-3" id="loginBtn">로그인</button>
 				<div class="text-center mt-4"><a href="/user/join-view">회원가입</a></div>
 			</div>
 		</section>
+		
+		<script layout:fragment="script">
+			$("#loginBtn").on("click", function() {
+				
+				let id = $("#idInput").val();
+				let password = $("#passwordInput").val();
+				
+				if(id == "") {
+					alert("아이디를 입력하세요");
+					return ;
+				}
+
+				if(password == "") {
+					alert("비밀번호를 입력하세요");
+					return ;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/user/login"
+					, data:{"loginId":id, "password":password}
+					, success:function(response) {
+						if(response.result == "success") {
+							location.href = "/post/list-view";
+						} else {
+							alert("아이디, 비밀번호를 확인해 주세요");
+						}
+					}
+					, error:function() {
+						alert("로그인 에러!");
+					}
+				});
+				
+			});
+		</script>
 </html>
