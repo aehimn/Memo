@@ -3,6 +3,12 @@
 #spring.thymeleaf.cache=false
 
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   mvc:
     static-path-pattern: /static/**
   config:

@@ -12,5 +12,10 @@ public class PostController {
 	public String postList() {
 		return "post/list";
 	}
+	
+	@GetMapping("/create-view")
+	public String inputPost() {
+		return "post/input";
+	}
 
 }
