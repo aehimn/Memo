@@ -1,7 +1,12 @@
 package com.haemin.memo.post.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.haemin.memo.common.FileManager;
 import com.haemin.memo.post.domain.Post;
 import com.haemin.memo.post.repository.PostRepository;
 
@@ -19,12 +24,16 @@ public class PostService {
 	public boolean addPost(
 			long userId
 			, String title
-			, String contents) {
+			, String contents
+			, MultipartFile file) {
+		
+		String imagePath = FileManager.saveFile(userId, file);
 		
 		Post post = Post.builder()
 		.userId(userId)
 		.title(title)
 		.contents(contents)
+		.imagePath(imagePath)
 		.build();
 		
 		try {
@@ -35,6 +44,21 @@ public class PostService {
 		
 		return true;
 		
+	}
+	
+	public List<Post> getPostList(long userId) {
+		
+		List<Post> postList = postRepository.findByUserId
+	}
+	
+	public Post getPost(long id) {
+		Optional<Post> optionalPost = postRepository.findById(id);
+		
+		if(optionalPost.isPresent()) {
+			return optionalPost.get();
+		} else {
+			return null;
+		}
 	}
 
 }

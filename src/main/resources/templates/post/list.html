@@ -4,6 +4,22 @@
       
       <section layout:fragment="contents">
       	<h1>메모 리스트</h1>
+      	<table class="table text-center">
+      		<thead>
+      			<tr>
+      				<th>No.</th>
+      				<th>제목</th>
+      				<th>작성 시간</th>
+      			</tr>
+      		</thead>
+      		<tbody>
+      			<tr th:each="memo:${memoList}">
+      				<td th:text="${memo.id}">21</td>
+      				<td th:text="${memo.title}">메모 입니다.</td>
+      				<td th:text="${temporals.format(memo.createdAt, 'yyyy-MM-dd hh:mm:ss'}">2025-07-01 13:11:12</td>
+      			</tr>
+      		</tbody>
+      	</table>
       </section>
 
 </html>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.haemin.memo.post.service.PostService;
 
@@ -26,12 +27,13 @@ public class PostRestController {
 	public Map<String, String> createPost(
 			@RequestParam String title
 			, @RequestParam String contents
+			, @RequestParam MultipartFile imageFile
 			, HttpSession session) {
 		
 		long userId = (Long)session.getAttribute("userId");
 		
 		Map<String, String> resultMap = new HashMap<>();
-		if(postService.addPost(userId, title, contents)) {
+		if(postService.addPost(userId, title, contents, imageFile)) {
 			resultMap.put("result", "success");
 		} else {
 			resultMap.put("result", "fail");
